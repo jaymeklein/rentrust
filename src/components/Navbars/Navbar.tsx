@@ -10,6 +10,8 @@ import {
     MoonIcon,
     SunIcon,
     UserIcon,
+    MapPinHouseIcon,
+    ChevronDown
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
@@ -17,9 +19,10 @@ import { useState } from "react";
 import { useAuth, SignInButton, SignOutButton } from "@clerk/nextjs";
 import { useTheme } from "next-themes";
 import Link from "next/link";
+import SidebarGroup from '../SidebarGroup/SidebarGroup';
 
 function Navbar() {
-    const [showMenu, setShowMenu] = useState(false);
+    const [showMenu, setShowMenu] = useState(true);
     const { isSignedIn } = useAuth();
     const { theme, setTheme } = useTheme();
     return (
@@ -56,8 +59,10 @@ function Navbar() {
                                 <nav className="flex flex-col space-y-4 mt-6">
                                     <Button variant="ghost" className="flex items-center gap-3 justify-start" asChild>
                                         <Link href="/">
-                                            <HomeIcon className="w-4 h-4" />
-                                            Home
+                                            <span className='flex gap-[0.75rem]'>
+                                                <HomeIcon className="w-4 h-4" />
+                                                Home
+                                            </span>
                                         </Link>
                                     </Button>
 
@@ -65,20 +70,37 @@ function Navbar() {
                                         <>
                                             <Button variant="ghost" className="flex items-center gap-3 justify-start" asChild>
                                                 <Link href="/notifications">
-                                                    <BellIcon className="w-4 h-4" />
-                                                    Notifications
+                                                    <span className='flex gap-[0.75rem]'>
+                                                        <BellIcon className="w-4 h-4" />
+                                                        Notifications
+                                                    </span>
                                                 </Link>
                                             </Button>
                                             <Button variant="ghost" className="flex items-center gap-3 justify-start" asChild>
+                                                <SidebarGroup icon={<MapPinHouseIcon className="w-4 h-4" />} text="Properties">
+                                                    <SidebarGroup icon={<MapPinHouseIcon className="w-4 h-4" />} text="Properties" nested={true}>
+                                                        <i>a</i>
+                                                        <i>b</i>
+                                                        <i>c</i>
+                                                    </SidebarGroup>
+                                                    <i>b</i>
+                                                    <i>c</i>
+                                                </SidebarGroup>
+                                            </Button>
+                                            <Button variant="ghost" className="flex items-center gap-3 justify-start" asChild>
                                                 <Link href="/profile">
-                                                    <UserIcon className="w-4 h-4" />
-                                                    Profile
+                                                    <span className='flex gap-[0.75rem]'>
+                                                        <UserIcon className="w-4 h-4" />
+                                                        Profile
+                                                    </span>
                                                 </Link>
                                             </Button>
                                             <SignOutButton>
                                                 <Button variant="ghost" className="flex items-center gap-3 justify-start w-full">
-                                                    <LogOutIcon className="w-4 h-4" />
-                                                    Logout
+                                                    <span className='flex gap-[0.75rem]'>
+                                                        <LogOutIcon className="w-4 h-4" />
+                                                        Logout
+                                                    </span>
                                                 </Button>
                                             </SignOutButton>
                                         </>
@@ -94,8 +116,8 @@ function Navbar() {
                         </Sheet>
                     </div>
                 </div>
-            </div>
-        </nav>
+            </div >
+        </nav >
     )
 }
 
