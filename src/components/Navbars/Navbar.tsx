@@ -11,7 +11,13 @@ import {
     SunIcon,
     UserIcon,
     MapPinHouseIcon,
-    ChevronDown
+    MonitorCogIcon,
+    SquareUserIcon,
+    HandCoinsIcon,
+    UserSearchIcon,
+    UserPenIcon,
+    KeyRoundIcon,
+    UsersIcon
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
@@ -57,7 +63,7 @@ function Navbar() {
                                     <SheetTitle>Menu</SheetTitle>
                                 </SheetHeader>
                                 <nav className="flex flex-col space-y-4 mt-6">
-                                    <Button variant="ghost" className="flex items-center gap-3 justify-start" asChild>
+                                    <Button variant="ghost" className="flex items-center gap-3 justify-start " asChild>
                                         <Link href="/">
                                             <span className='flex gap-[0.75rem]'>
                                                 <HomeIcon className="w-4 h-4" />
@@ -68,7 +74,7 @@ function Navbar() {
 
                                     {isSignedIn ? (
                                         <>
-                                            <Button variant="ghost" className="flex items-center gap-3 justify-start" asChild>
+                                            <Button variant="ghost" className="flex items-center gap-3 justify-start className='border-x border-x-gray-400 rounded-md'" asChild>
                                                 <Link href="/notifications">
                                                     <span className='flex gap-[0.75rem]'>
                                                         <BellIcon className="w-4 h-4" />
@@ -77,14 +83,59 @@ function Navbar() {
                                                 </Link>
                                             </Button>
                                             <Button variant="ghost" className="flex items-center gap-3 justify-start" asChild>
-                                                <SidebarGroup icon={<MapPinHouseIcon className="w-4 h-4" />} text="Properties">
-                                                    <SidebarGroup icon={<MapPinHouseIcon className="w-4 h-4" />} text="Properties" nested={true}>
-                                                        <i>a</i>
-                                                        <i>b</i>
-                                                        <i>c</i>
-                                                    </SidebarGroup>
-                                                    <i>b</i>
-                                                    <i>c</i>
+                                                <SidebarGroup icon={<MonitorCogIcon className="w-4 h-4" />} text="Properties">
+                                                    <Button variant="ghost" className="flex items-center gap-3 justify-start dark:hover:bg-accent hover:bg-gray-300" asChild>
+                                                        <Link href="/properties/properties">
+                                                            <span className='flex gap-[0.75rem]'>
+                                                                <MapPinHouseIcon className="w-4 h-4" />
+                                                                Properties
+                                                            </span>
+                                                        </Link>
+                                                    </Button>
+                                                    <Button variant="ghost" className="flex items-center gap-3 justify-start dark:hover:bg-accent hover:bg-gray-300" asChild>
+                                                        <Link href="/properties/owners">
+                                                            <span className='flex gap-[0.75rem]'>
+                                                                <HandCoinsIcon className="w-4 h-4" />
+                                                                Owners
+                                                            </span>
+                                                        </Link>
+                                                    </Button>
+                                                    <Button variant="ghost" className="flex items-center gap-3 justify-start dark:hover:bg-accent hover:bg-gray-300" asChild>
+                                                        <Link href="/properties/tenants">
+                                                            <span className='flex gap-[0.75rem]'>
+                                                                <SquareUserIcon className="w-4 h-4" />
+                                                                Tenants
+                                                            </span>
+                                                        </Link>
+                                                    </Button>
+                                                </SidebarGroup>
+                                            </Button>
+                                            <Button variant="ghost" className="" asChild>
+                                                <SidebarGroup icon={<UserSearchIcon className="w-4 h-4" />} text="Users">
+                                                    <Button variant="ghost" className="flex items-center gap-3 justify-start dark:hover:bg-accent hover:bg-gray-300" asChild>
+                                                        <Link href="/users/groups">
+                                                            <span className='flex gap-[0.75rem]'>
+                                                                <UsersIcon className="w-4 h-4" />
+                                                                User Groups
+                                                            </span>
+                                                        </Link>
+                                                    </Button>
+                                                    <Button variant="ghost" className="flex items-center gap-3 justify-start dark:hover:bg-accent hover:bg-gray-300" asChild>
+                                                        <Link href="/users/users">
+                                                            <span className='flex gap-[0.75rem]'>
+                                                                <UserPenIcon className="w-4 h-4" />
+                                                                Users
+                                                            </span>
+                                                        </Link>
+                                                    </Button>
+                                                    <Button variant="ghost" className="flex items-center gap-3 justify-start dark:hover:bg-accent hover:bg-gray-300" asChild>
+                                                        <Link href="/users/permissions">
+                                                            <span className='flex gap-[0.75rem]'>
+                                                                <KeyRoundIcon className="w-4 h-4" />
+                                                                Permissions
+                                                            </span>
+                                                        </Link>
+                                                    </Button>
                                                 </SidebarGroup>
                                             </Button>
                                             <Button variant="ghost" className="flex items-center gap-3 justify-start" asChild>
