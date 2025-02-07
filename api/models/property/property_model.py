@@ -1,23 +1,16 @@
-# property.py
 from sqlalchemy import Column, Float, Integer, ForeignKey, Enum, String
-from api.models.property.property_feature_model import PropertyFeature
-from api.utils.enums import PropertyTypes, PropertyStatuses
-from base.base import Base
 from sqlalchemy.orm import relationship
-
-from api.models.property.property_address_model import PropertyAddress
-from owner.owner_model import Owner
-from tenant.tenant_model import Tenant
-
+from api.models.base.base import Base
+from api.utils.property_enums import PropertyTypes, PropertyStatuses
 
 class Property(Base):
     __tablename__ = "properties"
 
     # IDs
     id = Column(Integer, primary_key=True, index=True)
-    owner_id = Column(Integer, ForeignKey(Owner.id), index=True, nullable=False)
-    tenant_id = Column(Integer, ForeignKey(Tenant.id), nullable=True)
-    address_id = Column(Integer, ForeignKey(PropertyAddress.id))
+    owner_id = Column(Integer, ForeignKey("owners.id"), index=True, nullable=False)
+    tenant_id = Column(Integer, ForeignKey("tenants.id"), nullable=True)
+    address_id = Column(Integer, ForeignKey("property_addresses.id"))
 
     # Enum columns
     type = Column(Enum(PropertyTypes), nullable=False, index=True)
@@ -34,6 +27,8 @@ class Property(Base):
     garage_spaces = Column(Integer, nullable=True)
     property_size = Column(Float, nullable=False)  # In M2
 
-    features = relationship(
-        "Feature", secondary=PropertyFeature, back_populates="properties"
-    )
+    # Relationships
+    tenant = relationship("Tenant", back_populates="properties")
+    owner = relationship("Owner", back_populates="properties")
+    address = relationship("PropertyAddress", back_populates="properties")
+    features = relationship("Feature", secondary="property_features", back_populates="properties")

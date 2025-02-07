@@ -1,32 +1,18 @@
-from pathlib import Path
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from dotenv import load_dotenv
-import os
+from sqlalchemy import create_engine, MetaData
+from sqlalchemy.ext.automap import automap_base
+from sqlalchemy.orm import sessionmaker, Session
+from sqlalchemy.orm.scoping import scoped_session
 
-load_dotenv(Path(".env"))
+DATABASE_URL = f"sqlite:///base.db"
 
-USER = os.getenv("DB_USER")
-PASSWORD = os.getenv("DB_PASSWORD")
-HOST = os.getenv("DB_HOST")
-DB_NAME = os.getenv("DB_NAME")
-
-DATABASE_URL = f"mysql://{USER}:{PASSWORD}@{HOST}/{DB_NAME}"
-
+Base = automap_base()
 engine = create_engine(
     DATABASE_URL, echo=True
 )  # `echo=True` only for debugging purposes, remove in production.
 
-# Session Factory
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+Base.prepare(autoload_with=engine)
+session_factory = sessionmaker(bind=engine)
+instantiated_session = scoped_session(session_factory)
 
-
-def get_session():
-    """
-    Returns a session to interact with the database.
-    """
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+def get_session() -> Session:
+    return instantiated_session()

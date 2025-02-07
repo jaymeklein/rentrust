@@ -15,4 +15,4 @@ class Tenant(Base):
     email = Column(String, unique=True, index=True, nullable=False)
     phone = Column(String, nullable=True)
 
-    properties = relationship("Property", back_populates="tenants")
+    # properties = relationship("Property", back_populates="tenants")

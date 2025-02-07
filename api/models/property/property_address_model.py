@@ -1,8 +1,8 @@
 from sqlalchemy import Column, Integer, String
-from base.base import Base
+from api.models.base.base import Base
 
 
-class PropertyAdAddress(Base):
+class PropertyAddress(Base):
     __tablename__ = "property_addresses"
 
     id = Column(Integer, primary_key=True, index=True)

@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String
-from base.base import Base
+from api.models.base.base import Base
 
 
 class Feature(Base):
