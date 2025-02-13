@@ -1,18 +1,15 @@
+from __future__ import annotations
+
 from sqlalchemy import Column, Integer, String
-from sqlalchemy.orm import DeclarativeBase
-from sqlalchemy.orm import relationship
 
-
-class Base(DeclarativeBase):
-    pass
+from api.models.base.base import Base
 
 
 class Tenant(Base):
-    __tablename__ = "tenants"
+  __tablename__ = "tenants"
 
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, nullable=False)
-    email = Column(String, unique=True, index=True, nullable=False)
-    phone = Column(String, nullable=True)
-
-    # properties = relationship("Property", back_populates="tenants")
+  id = Column(Integer, primary_key=True, index=True)
+  name = Column(String, nullable=False)
+  email = Column(String, unique=True, index=True, nullable=False)
+  phone = Column(String, nullable=True)
+  emergency_contact = Column(String(100))
